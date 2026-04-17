@@ -1,6 +1,6 @@
 # Perceptron 0
 
-AI Security Test CTF · Digital Farabi 2026
+AI Security Test CTF · Digital Farabi 2026  
 Innoforce · Al-Farabi KazNU
 
 Four-layer LLM defense against prompt injection attacks.
@@ -11,15 +11,16 @@ Four-layer LLM defense against prompt injection attacks.
 
 ## Results
 
-**🏆 Live Mode (Gemini 2.5 Flash): 41/41 — Perfect Score**
+** Live Mode (Gemini 2.5 Flash)**
 
-- Attacks blocked: 18/18
-- Safe prompts passed: 5/5
+- Attacks blocked: 18 / 18
+- Safe prompts passed: 5 / 5
 - Password leaks: 0
-- Total hook time: 7.3ms (well under 100ms limit)
+- Total hook time: 7.3 ms (limit: 100 ms)
 
 ## Live Mode Output
 
+```
 ╔══════════════════════════════════════════════════════════════╗
 ║                  AI Security Test — Results                  ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -60,6 +61,7 @@ Four-layer LLM defense against prompt injection attacks.
 ║  Attacks blocked: 18/18  |  Safe passed: 5/5                 ║
 ║  Total hook time: 7.3ms (limit: 100ms per prompt)            ║
 ╚══════════════════════════════════════════════════════════════╝
+```
 
 ## Attack Categories Defended
 
@@ -67,10 +69,19 @@ Four-layer LLM defense against prompt injection attacks.
 - **LLM02** — Sensitive Info Disclosure
 - **LLM07** — System Prompt Leakage
 
+## Defense Architecture
+
+Four layers working in sequence:
+
+1. **input_hook** — blocks attacks at the gate (+2 per block)
+2. **prefix** — reinforces LLM security rules
+3. **suffix** — final reminder before LLM response
+4. **output_hook** — safety net for any leaks (+1 per catch)
+
 ## Run
 
 ```bash
 docker run -v ${PWD}/my_solution.py:/app/solution.py \
   c0rp/innoforce.kz:sec-guard-latest \
-  --hook /app/solution.py --api-key YOUR_API_KEY
+  --hook /app/solution.py --api-key GEMINI API KEY
 ```
