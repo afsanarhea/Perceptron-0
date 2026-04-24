@@ -1,4 +1,4 @@
-# Perceptron 0
+# Perceptron.0
 
 AI Security Test CTF · Digital Farabi 2026  
 Innoforce · Al-Farabi KazNU
